@@ -1,0 +1,21 @@
+{
+    "product": [{
+            "name": "first item",
+            "itemsInStock": 5,
+            "id": "d2799800-acab-11e9-9692-8f8fe6f83dba",
+            "categoryId": "d2799801-acab-11e9-9692-8f8fe6f83dba"
+        },
+        {
+            "name": "first clone item",
+            "itemsInStock": 6,
+            "id": "d2799800-acab-22e9-9692-8f8fe6f83dba",
+            "categoryId": "d2799801-acab-11e9-9692-8f8fe6f83dba"
+        },
+        {
+            "name": "second item",
+            "itemsInStock": 5,
+            "id": "d6ebbf30-acab-11e9-9692-8f8fe6f83dba",
+            "categoryId": "d6ebbf31-acab-11e9-9692-8f8fe6f83dba"
+        }
+    ]
+}

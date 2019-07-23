@@ -1,0 +1,11 @@
+{
+    "categories": [{
+            "id": "d2799801-acab-11e9-9692-8f8fe6f83dba",
+            "name": "firs category"
+        },
+        {
+            "id": "d6ebbf31-acab-11e9-9692-8f8fe6f83dba",
+            "name": "second category"
+        }
+    ]
+}
