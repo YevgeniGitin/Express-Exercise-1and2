@@ -14,10 +14,14 @@ let categoriesarr:Categories[] =categoriesjsonfile.categories;
 function findCategory(req: Request, res: Response, next: NextFunction) {
       const id = req.params.id;
       const matching = categoriesarr.find(o => o.id === id);
-      if (!matching||id.length!=36) {
+    if(id.length!=36){
+        res.sendStatus(400);
+        return;  
+    }
+    if (!matching) {
         res.sendStatus(404);
         return;
-      }
+    }
       res.locals.matching =matching;
       res.locals.id = id;
       next();
@@ -26,7 +30,11 @@ function findCategory(req: Request, res: Response, next: NextFunction) {
 function findCategoryIndex(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
     const matchingIndex = categoriesarr.findIndex(o => o.id === id);
-    if (matchingIndex < 0|| id.length!=36) {
+    if(id.length!=36){
+        res.sendStatus(400);
+        return;  
+    }
+    if (matchingIndex < 0) {
         res.sendStatus(404);
         return;
     }
@@ -45,17 +53,21 @@ router.get('/:id/products',(req,res)=>{
     const id:string=req.params.id;
     //run a filter for gettin all the products
     const matching = productarr.filter(product=>product.categoryId===id);
-    if (matching.length===0 || id.length!=36) {
+    if(id.length!=36){
+        res.sendStatus(400);
+        return;  
+    }
+    if (matching.length===0) {
             res.sendStatus(404);
             return;
     }
-    res.status(400).send(matching);
+    res.status(200).send(matching);
 });
 //get specific category
 router.get('/:id',findCategory,(req,res)=>{
     console.log("get specific category");
     const {matching,id}=res.locals;
-    res.status(400).send(matching);
+    res.status(200).send(matching);
 });
 //add a new category
 router.post("/",(req,res)=>{
@@ -72,7 +84,7 @@ router.put("/:id",findCategoryIndex,(req,res)=>{
     let category:Categories=req.body;
     category.id=id;
     categoriesarr[matchingIndex]=category;
-    res.status(400).send(categoriesarr[matchingIndex]);
+    res.status(200).send(categoriesarr[matchingIndex]);
 });
 //delete category
 router.delete('/:id',findCategoryIndex,(req,res)=>{
@@ -80,11 +92,12 @@ router.delete('/:id',findCategoryIndex,(req,res)=>{
     const {matchingIndex,id} = res.locals;
     categoriesarr.splice(matchingIndex, 1);
     let matchingIndexproduct = productarr.findIndex(o => o.categoryId === id);
+    //delete all the categories products
     while(matchingIndexproduct>=0){
         productarr.splice(matchingIndexproduct, 1);
         matchingIndexproduct = productarr.findIndex(o => o.categoryId === id);
     }
-    res.sendStatus(400);  
+    res.sendStatus(204);  
 });
 
 export{ router };
