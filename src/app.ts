@@ -25,11 +25,15 @@ app.use('/categories',Router);//add prefix
 //     console.log("get product by id");
 //     const id:string=req.params.id;
 //     const matching = productarr.find(o => o.id === id); 
-//     if (!matching || id.length!=36) {
+//     if(id.length!=36){
+//         res.sendStatus(400);
+//         return;
+//     }
+//     if (!matching) {
 //         res.sendStatus(404);
 //         return;
 //     }
-//     res.status(400).send(matching);
+//     res.status(200).send(matching);
 // });
 
 // app.post('/products',(req,res)=>{
@@ -49,25 +53,29 @@ app.use('/categories',Router);//add prefix
 //     console.log("update product by id");
 //     const id:string=req.params.id;
 //     const matchingIndex = productarr.findIndex(o => o.id === id); 
-//     if (matchingIndex < 0|| id.length!=36) {
-//         res.sendStatus(404);
+//     if(id.length!=36){
+//         res.sendStatus(400);
 //         return;
 //     }
 //     if(productarr[matchingIndex].name.length<3){
 //         res.sendStatus(409);
 //         return;
 //     }
+//     if (!matching) {
+//         res.sendStatus(404);
+//         return;
+//     }
 //     let product:Product=req.body;
 //     product.id=req.params.id;
 //     productarr[matchingIndex]=product;
-//     res.status(400).send(productarr[matchingIndex]);
+//     res.status(200).send(productarr[matchingIndex]);
 // });
 
 // app.delete('/products/:id',(req,res)=>{
 //     console.log("delete item");
 //     const id:string=req.params.id;
 //     if(id.length!=36){
-//         res.sendStatus(404);
+//         res.sendStatus(400);
 //         return; 
 //     }
 //     const matchingIndex = productarr.findIndex(o => o.id === id);
@@ -76,8 +84,7 @@ app.use('/categories',Router);//add prefix
 //         return;
 //     }
 //     productarr.splice(matchingIndex, 1);
-//     res.sendStatus(204);
-//     return;  
+//     res.sendStatus(204); 
 // });
 
 export{ app };
