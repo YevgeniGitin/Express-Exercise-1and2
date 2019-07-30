@@ -14,10 +14,10 @@ let categoriesarr: Categories[] = categoriesjsonfile.categories;
 function findCategory(req: Request, res: Response, next: NextFunction) {
   const id = req.params.id;
   const matching = categoriesarr.find(o => o.id === id);
-  if (id.length != 36) {
-    res.sendStatus(400);
-    return;
-  }
+  // if (id.length != 36) {
+  //   res.sendStatus(400);
+  //   return;
+  // }
   if (!matching) {
     res.sendStatus(404);
     return;
@@ -30,10 +30,10 @@ function findCategory(req: Request, res: Response, next: NextFunction) {
 function findCategoryIndex(req: Request, res: Response, next: NextFunction) {
   const id = req.params.id;
   const matchingIndex = categoriesarr.findIndex(o => o.id === id);
-  if (id.length != 36) {
-    res.sendStatus(400);
-    return;
-  }
+  // if (id.length != 36) {
+  //   res.sendStatus(400);
+  //   return;
+  // }
   if (matchingIndex < 0) {
     res.sendStatus(404);
     return;
@@ -53,10 +53,10 @@ router.get("/:id/products", (req, res) => {
   const id: string = req.params.id;
   //run a filter for gettin all the products
   const matching = productarr.filter(product => product.categoryId === id);
-  if (id.length != 36) {
-    res.sendStatus(400);
-    return;
-  }
+  // if (id.length != 36) {
+  //   res.sendStatus(400);
+  //   return;
+  // }
   if (matching.length === 0) {
     res.sendStatus(404);
     return;

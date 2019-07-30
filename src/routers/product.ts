@@ -9,10 +9,10 @@ const router = Router();
 function findProduct(req: Request, res: Response, next: NextFunction) {
   const id = req.params.id;
   const matching = productarr.find(o => o.id === id);
-  if (id.length != 36) {
-    res.sendStatus(400);
-    return;
-  }
+  // if (id.length != 36) {
+  //   res.sendStatus(400);
+  //   return;
+  // }
   if (!matching) {
     res.sendStatus(404);
     return;
@@ -25,14 +25,14 @@ function findProduct(req: Request, res: Response, next: NextFunction) {
 function findProductIndex(req: Request, res: Response, next: NextFunction) {
   const id: string = req.params.id;
   const matchingIndex: number = productarr.findIndex(o => o.id === id);
-  if (id.length != 36) {
-    res.sendStatus(400);
-    return;
-  }
-  if (req.body.name.length < 3) {
-    res.sendStatus(409);
-    return;
-  }
+  // if (id.length != 36) {
+  //   res.sendStatus(400);
+  //   return;
+  // }
+  // if (req.body.name.length < 3) {
+  //   res.sendStatus(409);
+  //   return;
+  // }
   if (matchingIndex < 0) {
     res.sendStatus(404);
     return;
@@ -49,10 +49,10 @@ function findProductIndexForSDelete(
 ) {
   const id: string = req.params.id;
   const matchingIndex: number = productarr.findIndex(o => o.id === id);
-  if (id.length != 36) {
-    res.sendStatus(400);
-    return;
-  }
+  // if (id.length != 36) {
+  //   res.sendStatus(400);
+  //   return;
+  // }
   if (matchingIndex < 0) {
     res.sendStatus(404);
     return;
@@ -77,10 +77,10 @@ router.get("/:id", findProduct, (req, res) => {
 router.post("/", (req, res) => {
   console.log("add product");
   const product: Product = req.body;
-  if (product.name.length < 3) {
-    res.sendStatus(409);
-    return;
-  }
+  // if (product.name.length < 3) {
+  //   res.sendStatus(409);
+  //   return;
+  // }
   product.id = uuidv1();
   product.categoryId = uuidv1();
   productarr.push(product);
