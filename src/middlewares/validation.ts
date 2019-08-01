@@ -1,17 +1,25 @@
 import { Request, Response, NextFunction } from "express";
+import * as schema from "../validation/validationScemas";
+import joi from "joi";
 
 export function idValidation(req: Request, res: Response, next: NextFunction) {
   const id = req.params.id;
-  if (id.length != 36) {
-    throw new Error('input-validation')
+  const { error, value } = joi.validate(id, schema.idschema);
+  if (error !== null) {
+    throw new Error("input-validation");
   }
   next();
 }
 
-export function nameValidation(req: Request, res: Response, next: NextFunction) {
+export function nameValidation(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   if (req.method === "POST" || req.method === "PUT") {
-    if (req.body.name.length < 3) {
-      throw new Error('input-validation')
+    const { error, value } = joi.validate(req.body.name, schema.nameschema);
+    if (error !== null) {
+      throw new Error("input-validation");
     }
   }
   next();
