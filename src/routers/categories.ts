@@ -65,7 +65,6 @@ router.get("/:id/products", async (req, res, next) => {
     console.log("get products by categories id");
     const id: string = req.params.id;
     const productarr = await loadProducts();
-    console.log(productarr);
     //run a filter for gettin all the products
     const matching = productarr.filter(product => product.categoryId === id);
     if (matching.length === 0) {

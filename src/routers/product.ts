@@ -30,7 +30,6 @@ async function findProductIndex( req: Request, res: Response, next: NextFunction
   try {
     const id: string = req.params.id;
     let productarr = await loadProducts();
-    console.log("enter");
     const matchingIndex: number = productarr.findIndex(o => o.id === id);
     if (matchingIndex < 0) {
       throw new Error("not-found");

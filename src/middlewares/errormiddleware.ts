@@ -12,6 +12,6 @@ export function Errors(
   } else if (err.message === "not-found") {
     res.status(404).send("not found");
   } else {
-    res.send(err.message);
+    next(err);
   }
 }
