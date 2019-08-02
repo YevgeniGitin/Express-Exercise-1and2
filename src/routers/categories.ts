@@ -1,35 +1,18 @@
 import { Request, Response, NextFunction, Router } from "express";
 //import data
-import productjsonfile from "../jsonFiles/products.json";
 import { Product } from "../models/product";
-import categoriesjsonfile from "../jsonFiles/categories.json";
 import { Categories } from "../models/categories";
 import uuidv1 from "uuid/v1";
-
-const request = require("request-promise");
-const client = request.defaults({
-  baseUrl: "http://localhost:3002/public",
-  json: true
-});
+import{productarr,categoriesarr} from'../storeData/data';
 
 const router = Router();
 //create array for prodacts and for categories
-async function loadProducts(): Promise<Product[]> {
-  try {
-    let list = await client.get("/products.json");
-    return list.product;
-  } catch (err) {
-    throw new Error(err);
-  }
-}
 
+async function loadProducts(): Promise<Product[]> {
+  return Promise.resolve(productarr);
+}
 async function loadCategories(): Promise<Categories[]> {
-  try {
-    let list = await client.get("/categories.json");
-    return list.categories;
-  } catch (err) {
-    throw new Error(err);
-  }
+  return Promise.resolve(categoriesarr);
 }
 
 //handler for find Category

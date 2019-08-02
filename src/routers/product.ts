@@ -1,23 +1,12 @@
 import { Request, Response, NextFunction, Router } from "express";
-import productjsonfile from "../jsonFiles/products.json";
 import { Product } from "../models/product";
 import uuidv1 from "uuid/v1";
-
-const request = require("request-promise");
-const client = request.defaults({
-  baseUrl: "http://localhost:3002/public",
-  json: true
-});
+import{productarr} from'../storeData/data';
 
 const router = Router();
+
 async function loadProducts(): Promise<Product[]> {
-  try {
-    let list = await client.get("/products.json");
-    return list.product;
-  } catch (err) {
-    throw new Error(err);
-  }
-  //return Promise.resolve(productjsonfile.product);
+  return Promise.resolve(productarr);
 }
 
 async function findProduct(req: Request, res: Response, next: NextFunction) {
@@ -41,6 +30,7 @@ async function findProductIndex( req: Request, res: Response, next: NextFunction
   try {
     const id: string = req.params.id;
     let productarr = await loadProducts();
+    console.log("enter");
     const matchingIndex: number = productarr.findIndex(o => o.id === id);
     if (matchingIndex < 0) {
       throw new Error("not-found");
@@ -59,7 +49,6 @@ router.get("/", async (req, res, next) => {
   console.log("get all products");
   try {
     const productarr = await loadProducts();
-    console.log(productarr);
     res.status(200).send(productarr);
   } catch (err) {
     next(err);

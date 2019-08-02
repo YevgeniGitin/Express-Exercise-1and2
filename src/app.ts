@@ -4,8 +4,10 @@ import { router as CategotyRouter } from "./routers/categories";
 import { router as ProductRouter } from "./routers/product";
 import { idValidation, nameValidation } from "./middlewares/validation";
 import { Errors } from "./middlewares/errormiddleware";
+import { initConfig } from './utils/config';
 import path from "path";
 
+initConfig();
 const app = express();
 
 app.use(express.json());

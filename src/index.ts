@@ -1,7 +1,10 @@
 // tslint:disable: no-console
 import { app } from "./app";
+import { getConfig } from './utils/config';
+import{setdata} from'./storeData/data';
 //create a server
-app.set("port", process.env.PORT || 3002);
+const port = +(getConfig('PORT', 3000))
+app.set("port",port);
 
 const server = app.listen(app.get("port"), () => {
   console.log(
@@ -11,3 +14,6 @@ const server = app.listen(app.get("port"), () => {
   );
   console.log(" Press CTRL-C to stop\n");
 });
+setdata();
+
+
