@@ -9,9 +9,9 @@ export function Errors(
   // tslint:disable-next-line: no-console
   if (err.message === "input-validation") {
     res.status(400).send("input error");
-  } else if (err.message === "not-found") {
-    res.status(404).send("not found");
-  } else {
+  // } else if (err.message === "not-found") {
+  //   res.status(404).send("not found");
+   } else {
     next(err);
   }
 }
